@@ -1,0 +1,318 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Race Sport';
+  src: url('/fonts/race-sport.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  /* Race Sport TTF dosyasında Türkçe karakterler (İ dahil) mevcut */
+}
+
+/* Sadece Ş harfi için Oswald fallback - Race Sport'ta Ş yok */
+@font-face {
+  font-family: 'Race Sport Turkish';
+  src: local('Oswald Bold'),
+       url('https://fonts.gstatic.com/s/oswald/v49/TK3_WkUHHAgjg528cUwekfif.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  /* Sadece Ş harfi için Oswald kullan */
+  unicode-range: U+015E,      /* Ş (büyük ş) */
+                  U+015F;      /* ş (küçük ş) */
+}
+
+/* Oswald font for Ş character fallback */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap');
+
+:root {
+  --ph-red: #E31E24;
+  --ph-black: #1A1A1A;
+  --ph-dark: #2D2D2D;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Jost', sans-serif;
+  background-color: var(--ph-black);
+  color: #FFFFFF;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile touch improvements */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, a {
+  touch-action: manipulation;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ph-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ph-red);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c91a20;
+}
+
+/* Checkered flag pattern */
+.checkered-pattern {
+  background-image: 
+    linear-gradient(45deg, #1A1A1A 25%, transparent 25%),
+    linear-gradient(-45deg, #1A1A1A 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #1A1A1A 75%),
+    linear-gradient(-45deg, transparent 75%, #1A1A1A 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+.checkered-red {
+  background-image: 
+    linear-gradient(45deg, #E31E24 25%, transparent 25%),
+    linear-gradient(-45deg, #E31E24 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #E31E24 75%),
+    linear-gradient(-45deg, transparent 75%, #E31E24 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* Speed lines animation */
+@keyframes speed-lines {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.speed-lines {
+  animation: speed-lines 2s linear infinite;
+}
+
+/* Glow effect */
+.glow-red {
+  box-shadow: 0 0 20px rgba(227, 30, 36, 0.5);
+}
+
+.glow-red-strong {
+  box-shadow: 0 0 40px rgba(227, 30, 36, 0.8);
+}
+
+/* Tire Track Pattern */
+.tire-track-pattern {
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 255, 255, 0.03) 10px,
+      rgba(255, 255, 255, 0.03) 20px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 255, 255, 0.03) 10px,
+      rgba(255, 255, 255, 0.03) 20px
+    );
+}
+
+/* Glitch Effect */
+@keyframes glitch {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes glitch-text {
+  0%, 100% {
+    clip-path: inset(0 0 0 0);
+    transform: translate(0);
+  }
+  20% {
+    clip-path: inset(20% 0 60% 0);
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    clip-path: inset(40% 0 20% 0);
+    transform: translate(2px, -2px);
+  }
+  60% {
+    clip-path: inset(60% 0 20% 0);
+    transform: translate(-2px, 2px);
+  }
+  80% {
+    clip-path: inset(80% 0 5% 0);
+    transform: translate(2px, -2px);
+  }
+}
+
+.glitch {
+  position: relative;
+  animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.glitch-text::before {
+  left: 2px;
+  color: #E31E24;
+  clip-path: inset(0 0 0 0);
+  animation: glitch-text 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  z-index: -1;
+}
+
+.glitch-text::after {
+  left: -2px;
+  color: rgba(0, 255, 255, 0.8);
+  clip-path: inset(0 0 0 0);
+  animation: glitch-text 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite reverse;
+  z-index: -2;
+}
+
+/* Custom Racing Cursor */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+
+  a, button, [role="button"], input, select, textarea {
+    cursor: none !important;
+  }
+}
+
+.custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: difference;
+  transition: transform 0.1s ease-out;
+}
+
+.custom-cursor::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--ph-red);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.custom-cursor::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--ph-red);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.5;
+  animation: cursor-pulse 1.5s ease-in-out infinite;
+}
+
+.custom-cursor.clicking::before {
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+.custom-cursor.clicking::after {
+  transform: translate(-50%, -50%) scale(1.5);
+  opacity: 0;
+}
+
+.custom-cursor.hovering::before {
+  transform: translate(-50%, -50%) scale(1.5);
+  background: white;
+}
+
+.custom-cursor.hovering::after {
+  transform: translate(-50%, -50%) scale(2);
+  border-color: white;
+}
+
+@keyframes cursor-pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.3;
+  }
+}
+
+/* Race Sport font optimizasyonu - Türkçe karakterler için fallback */
+.font-race {
+  font-family: 'Race Sport', 'Race Sport Turkish', 'Oswald', 'Arial Black', 'Impact', sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  /* Türkçe karakterler için font-weight ayarı - Oswald ile uyumlu */
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  /* Türkçe karakterlerin daha iyi görünmesi için */
+  font-variant-ligatures: none;
+  /* Ş harfi için özel karakter desteği */
+  font-variant-numeric: normal;
+  text-transform: none;
+}
+
+/* İ ve Ş harfleri için JavaScript çözümü layout.tsx'te uygulanıyor */
+
