@@ -198,7 +198,7 @@ export default function Hero() {
                 transition={{ duration: 0.8, delay: 0.9 }}
                 className="font-futura text-xs sm:text-sm md:text-base lg:text-lg text-white/90 mt-4 sm:mt-6 relative z-10 px-2"
               >
-                Türkiye'nin En Tutkulu Otomotiv Topluluğu
+                Türkiye'nin En Tutkulu Otomobil Topluluğu
               </motion.p>
             </div>
           </div>

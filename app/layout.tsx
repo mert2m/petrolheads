@@ -5,10 +5,10 @@ import Script from 'next/script'
 export const metadata: Metadata = {
   metadataBase: new URL('https://petrolheads.com.tr'),
   title: {
-    default: "Petrolheads - Türkiye'nin Önde Gelen Otomotiv Topluluğu | Driving Spirit",
+    default: "Petrolheads - Türkiye'nin Önde Gelen Otomobil Topluluğu | Driving Spirit",
     template: '%s | Petrolheads',
   },
-  description: "23,000+ Türk araba tutkununa katıl. Petrolheads, otomotiv kültürünü yaşayan ve nefes alanların evi. Etkinlikler, buluşmalar ve motor tutkusu.",
+  description: "26,000+ Türk araba tutkununa katıl. Petrolheads, otomobil kültürünü yaşayan ve nefes alanların evi. Etkinlikler, buluşmalar ve motor tutkusu.",
   keywords: [
     'otomotiv topluluğu',
     'araba tutkunu',
@@ -40,8 +40,8 @@ export const metadata: Metadata = {
     locale: 'tr_TR',
     url: 'https://petrolheads.com.tr',
     siteName: 'Petrolheads',
-    title: "Petrolheads - Türkiye'nin Önde Gelen Otomotiv Topluluğu",
-    description: "23,000+ Türk araba tutkununa katıl. Petrolheads, otomotiv kültürünü yaşayan ve nefes alanların evi.",
+    title: "Petrolheads - Türkiye'nin Önde Gelen Otomobil Topluluğu",
+    description: "26,000+ Türk araba tutkununa katıl. Petrolheads, otomobil kültürünü yaşayan ve nefes alanların evi.",
     images: [
       {
         url: '/images/og-image.jpg',
@@ -53,8 +53,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Petrolheads - Türkiye'nin Önde Gelen Otomotiv Topluluğu",
-    description: "23,000+ Türk araba tutkununa katıl. Driving Spirit.",
+    title: "Petrolheads - Türkiye'nin Önde Gelen Otomobil Topluluğu",
+    description: "26,000+ Türk araba tutkununa katıl. Driving Spirit.",
     images: ['/images/og-image.jpg'],
     creator: '@petrolheads',
   },

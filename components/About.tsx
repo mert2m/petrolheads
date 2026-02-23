@@ -142,12 +142,12 @@ export default function About() {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <p className="font-futura text-base sm:text-lg md:text-xl text-gray-300 mb-4 sm:mb-6 leading-relaxed">
-                Beygir gücü, mühendislik ve sürüş heyecanına olan ortak tutkumuzdan doğduk.
-                Petrolheads, Türkiye'nin en hızlı büyüyen otomotiv topluluğu — 23,000+ üye ve sayı artıyor.
+                Otomobillere, mühendisliğine ve sürüşlerine olan ortak tutkumuzdan doğduk.
+                Petrolheads, Türkiye'nin en hızlı büyüyen otomobil topluluğu — 26,000+ üye ve sayı artıyor.
               </p>
               <p className="font-futura text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed">
-                Biz sadece araba tutkunları değiliz. Yüksek oktanlı yakıtın kokusu ve motorların kükremesiyle
-                birleşen bir aileyiz.
+                Biz sadece araba tutkunları değiliz. Aynı tutkuyu paylaşan insanların bir araya geldiği,
+                gerçek dostlukların kurulduğu bir aileyiz.
               </p>
             </motion.div>
 

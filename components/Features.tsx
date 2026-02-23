@@ -33,7 +33,7 @@ const features = [
       </svg>
     ),
     title: 'GÜNLÜK TARTIŞMALAR',
-    description: 'Garaj sohbetlerinden yola çıkıp tüm otomotiv dünyasına uzanan canlı konuşmalar. Her gün yeni bir fikir, yeni bir heyecan.',
+    description: 'Garaj sohbetlerinden yola çıkıp tüm otomobil dünyasına uzanan canlı konuşmalar. Her gün yeni bir fikir, yeni bir heyecan.',
   },
   {
     icon: (

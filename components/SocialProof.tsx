@@ -143,7 +143,7 @@ export default function SocialProof() {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="font-futura text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 sm:mb-12 px-2 leading-relaxed"
               >
-                Bizi X (Twitter)'da takip et ve Türkiye'nin en tutkulu otomotiv topluluğunun bir parçası ol.
+                Bizi X (Twitter)'da takip et ve Türkiye'nin en tutkulu otomobil topluluğunun bir parçası ol.
               </motion.p>
 
               <div className="flex flex-col items-center space-y-6 sm:space-y-8">
@@ -200,7 +200,7 @@ export default function SocialProof() {
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                       </svg>
                     </motion.div>
-                    <span className="font-futura font-bold text-white text-xl sm:text-2xl md:text-3xl">23,000+</span>
+                    <span className="font-futura font-bold text-white text-xl sm:text-2xl md:text-3xl">26,000+</span>
                     <span className="font-futura text-gray-400 text-base sm:text-lg">Takipçi</span>
                   </div>
                 </motion.div>

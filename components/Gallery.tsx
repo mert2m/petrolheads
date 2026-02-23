@@ -98,7 +98,7 @@ export default function Gallery() {
               className="h-1 bg-gradient-to-r from-transparent via-ph-red to-transparent mx-auto mb-4"
             />
             <p className="font-futura text-gray-400 text-base sm:text-lg">
-              Türk otomotiv kültürünün ruhunu yakalıyoruz
+              Türk otomobil kültürünün ruhunu yakalıyoruz
             </p>
           </motion.div>
 

@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 interface FormData {
   adSoyad: string
   yas: string
+  meslek: string
   sehir: string
   telefon: string
   instagram: string
@@ -14,24 +15,22 @@ interface FormData {
   arac: string
   modifiye: string
   ehliyetSuresi: string
-  kullanimSikligi: string
+  pistDeneyimi: string
+  tougeDeneyimi: string
+  konvoyDeneyimi: string
+  driftDeneyimi: string
   roadTrip: string
-  touge: string
-  pist: string
-  gokart: string
-  otomobilKulturu: string[]
-  ruyaGaraj: string
-  favoriFilm: string
-  surusMuzigi: string
+  surusTarzlari: string[]
   nerdenDuydun: string
   nedenKatilmak: string
-  etkinlikKatilimi: string
+  etkinlikSikligi: string
   kurallarKabul: boolean
 }
 
 const initialFormData: FormData = {
   adSoyad: '',
   yas: '',
+  meslek: '',
   sehir: '',
   telefon: '',
   instagram: '',
@@ -39,18 +38,15 @@ const initialFormData: FormData = {
   arac: '',
   modifiye: '',
   ehliyetSuresi: '',
-  kullanimSikligi: '',
+  pistDeneyimi: '',
+  tougeDeneyimi: '',
+  konvoyDeneyimi: '',
+  driftDeneyimi: '',
   roadTrip: '',
-  touge: '',
-  pist: '',
-  gokart: '',
-  otomobilKulturu: [],
-  ruyaGaraj: '',
-  favoriFilm: '',
-  surusMuzigi: '',
+  surusTarzlari: [],
   nerdenDuydun: '',
   nedenKatilmak: '',
-  etkinlikKatilimi: '',
+  etkinlikSikligi: '',
   kurallarKabul: false,
 }
 
@@ -71,31 +67,15 @@ const EHLIYET_OPTIONS = [
   '10+ yıl',
 ]
 
-const KULLANIM_OPTIONS = [
-  { value: 'gunluk', label: 'Günlük sürücü' },
-  { value: 'haftasonu', label: 'Hafta sonu savaşçısı' },
-  { value: 'arasira', label: 'Ara sıra' },
-  { value: 'garaj', label: 'Garaj kraliçesi' },
-]
-
-const KULTUR_OPTIONS = [
-  'JDM',
-  'Euro',
-  'American Muscle',
-  'Classic',
-  'Hypercar',
+const SURUS_TARZLARI = [
+  'Roll',
+  'Touge',
+  'Pist',
+  'Drift',
+  'Off-Road',
+  'Ralli',
+  'Konvoy',
   'Hepsi',
-]
-
-const FILM_OPTIONS = [
-  'Fast & Furious',
-  'Initial D',
-  'Need for Speed',
-  'Rush',
-  'Ford v Ferrari',
-  'Baby Driver',
-  'Cars',
-  'Diğer',
 ]
 
 const NERDEN_OPTIONS = [
@@ -107,10 +87,11 @@ const NERDEN_OPTIONS = [
   'Diğer',
 ]
 
-const ETKINLIK_OPTIONS = [
-  { value: 'evet', label: 'Evet, her zaman varım!' },
-  { value: 'belki', label: 'Belki, duruma göre' },
-  { value: 'izlemek', label: 'Önce izlemek istiyorum' },
+const ETKINLIK_SIKLIGI_OPTIONS = [
+  { value: 'her-hafta', label: 'Her hafta buluşurum' },
+  { value: 'ayda-bir', label: 'Ayda 1-2 kez' },
+  { value: 'arada', label: 'Arada sırada' },
+  { value: 'uzaktan', label: 'Uzaktan takip ederim' },
 ]
 
 // ---- Sub-components ----
@@ -506,7 +487,7 @@ export default function BasvuruForm() {
   }, [errors])
 
   const handleMultiToggle = useCallback((selected: string[]) => {
-    setFormData((prev) => ({ ...prev, otomobilKulturu: selected }))
+    setFormData((prev) => ({ ...prev, surusTarzlari: selected }))
   }, [])
 
   const validateStep = (step: number): boolean => {
@@ -523,12 +504,11 @@ export default function BasvuruForm() {
     if (step === 2) {
       if (!formData.arac.trim()) newErrors.arac = 'Araç bilgisi gerekli'
       if (!formData.ehliyetSuresi) newErrors.ehliyetSuresi = 'Ehliyet süresi seçin'
-      if (!formData.kullanimSikligi) newErrors.kullanimSikligi = 'Kullanım sıklığı seçin'
     }
 
     if (step === 3) {
       if (!formData.nedenKatilmak.trim()) newErrors.nedenKatilmak = 'Bu alanı doldurun'
-      else if (formData.nedenKatilmak.trim().length < 50) newErrors.nedenKatilmak = `En az 50 karakter gerekli (${formData.nedenKatilmak.trim().length}/50)`
+      else if (formData.nedenKatilmak.trim().length < 100) newErrors.nedenKatilmak = `En az 100 karakter gerekli (${formData.nedenKatilmak.trim().length}/100)`
     }
 
     if (step === 4) {
@@ -564,7 +544,7 @@ export default function BasvuruForm() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             ...formData,
-            otomobilKulturu: formData.otomobilKulturu.join(', '),
+            surusTarzlari: formData.surusTarzlari.join(', '),
             tarih: new Date().toLocaleString('tr-TR'),
             kurallarKabul: formData.kurallarKabul ? 'Evet' : 'Hayır',
           }),
@@ -693,6 +673,16 @@ export default function BasvuruForm() {
                         error={errors.yas}
                       />
                       <FormInput
+                        label="Meslek"
+                        name="meslek"
+                        value={formData.meslek}
+                        onChange={handleInputChange}
+                        placeholder="Yazılım Mühendisi, Öğrenci..."
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <FormInput
                         label="Şehir"
                         name="sehir"
                         value={formData.sehir}
@@ -701,18 +691,17 @@ export default function BasvuruForm() {
                         placeholder="İstanbul"
                         error={errors.sehir}
                       />
+                      <FormInput
+                        label="Telefon / WhatsApp"
+                        name="telefon"
+                        value={formData.telefon}
+                        onChange={handleInputChange}
+                        required
+                        placeholder="05XX XXX XX XX"
+                        type="tel"
+                        error={errors.telefon}
+                      />
                     </div>
-
-                    <FormInput
-                      label="Telefon / WhatsApp"
-                      name="telefon"
-                      value={formData.telefon}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="05XX XXX XX XX"
-                      type="tel"
-                      error={errors.telefon}
-                    />
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                       <FormInput
@@ -744,7 +733,7 @@ export default function BasvuruForm() {
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                     className="space-y-5"
                   >
-                    <h3 className="font-race text-xl sm:text-2xl text-white mb-6">ARAÇ BiLGiLERi</h3>
+                    <h3 className="font-race text-xl sm:text-2xl text-white mb-6">ARAÇ & TECRÜBE</h3>
 
                     <FormInput
                       label="Araç (Marka / Model / Yıl)"
@@ -775,14 +764,42 @@ export default function BasvuruForm() {
                       error={errors.ehliyetSuresi}
                     />
 
-                    <RadioGroup
-                      label="Araç kullanım sıklığı"
-                      name="kullanimSikligi"
-                      options={KULLANIM_OPTIONS}
-                      value={formData.kullanimSikligi}
-                      onChange={(val) => handleRadioChange('kullanimSikligi', val)}
-                      error={errors.kullanimSikligi}
+                    <FormTextarea
+                      label="Pist deneyimin var mı? Anlat"
+                      name="pistDeneyimi"
+                      value={formData.pistDeneyimi}
+                      onChange={handleInputChange}
+                      placeholder="Istanbul Park track day, sim racing, vb..."
+                      rows={2}
                     />
+
+                    <FormTextarea
+                      label="Touge / dağ yolu tecrüben"
+                      name="tougeDeneyimi"
+                      value={formData.tougeDeneyimi}
+                      onChange={handleInputChange}
+                      placeholder="Uludağ yolu, Bolu Dağı, favori rotaların..."
+                      rows={2}
+                    />
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <FormTextarea
+                        label="Konvoy sürüşleri yaptın mı?"
+                        name="konvoyDeneyimi"
+                        value={formData.konvoyDeneyimi}
+                        onChange={handleInputChange}
+                        placeholder="Kaç kişilik, nereye..."
+                        rows={2}
+                      />
+                      <FormTextarea
+                        label="Drift deneyimin var mı?"
+                        name="driftDeneyimi"
+                        value={formData.driftDeneyimi}
+                        onChange={handleInputChange}
+                        placeholder="Drift etkinliği, kendi pratiğin..."
+                        rows={2}
+                      />
+                    </div>
                   </motion.div>
                 )}
 
@@ -800,7 +817,7 @@ export default function BasvuruForm() {
                     <h3 className="font-race text-xl sm:text-2xl text-white mb-6">SÜRÜS TUTKUSU & MOTiVASYON</h3>
 
                     <FormTextarea
-                      label="Hayalindeki road trip rotası nedir?"
+                      label="Hayalindeki road trip rotası"
                       name="roadTrip"
                       value={formData.roadTrip}
                       onChange={handleInputChange}
@@ -808,66 +825,12 @@ export default function BasvuruForm() {
                       rows={2}
                     />
 
-                    <FormTextarea
-                      label="Touge / dağ yolu deneyimin"
-                      name="touge"
-                      value={formData.touge}
-                      onChange={handleInputChange}
-                      placeholder="Uludağ yolu, Bolu Dağı..."
-                      rows={2}
-                    />
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <FormTextarea
-                        label="Pist deneyimin"
-                        name="pist"
-                        value={formData.pist}
-                        onChange={handleInputChange}
-                        placeholder="Istanbul Park, track day..."
-                        rows={2}
-                      />
-                      <FormTextarea
-                        label="Go-kart deneyimin"
-                        name="gokart"
-                        value={formData.gokart}
-                        onChange={handleInputChange}
-                        placeholder="Kaç yıldır, en iyi lap..."
-                        rows={2}
-                      />
-                    </div>
-
                     <MultiToggle
-                      label="Seni heyecanlandıran otomobil kültürü"
-                      options={KULTUR_OPTIONS}
-                      selected={formData.otomobilKulturu}
+                      label="Seni ne heyecanlandırıyor?"
+                      options={SURUS_TARZLARI}
+                      selected={formData.surusTarzlari}
                       onChange={handleMultiToggle}
                     />
-
-                    <FormTextarea
-                      label="Rüya garajın (3 araç seç)"
-                      name="ruyaGaraj"
-                      value={formData.ruyaGaraj}
-                      onChange={handleInputChange}
-                      placeholder="Nissan Skyline R34, Porsche 911 GT3, BMW E30 M3"
-                      rows={2}
-                    />
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <FormSelect
-                        label="Favori otomobil filmin"
-                        name="favoriFilm"
-                        value={formData.favoriFilm}
-                        onChange={handleInputChange}
-                        options={FILM_OPTIONS}
-                      />
-                      <FormInput
-                        label="Sürüşte dinlediğin müzik"
-                        name="surusMuzigi"
-                        value={formData.surusMuzigi}
-                        onChange={handleInputChange}
-                        placeholder="Eurobeat, Rock, Hip-Hop..."
-                      />
-                    </div>
 
                     <FormSelect
                       label="Petrolheads'i nereden duydun?"
@@ -883,10 +846,10 @@ export default function BasvuruForm() {
                       value={formData.nedenKatilmak}
                       onChange={handleInputChange}
                       required
-                      placeholder="Bize tutkunu, motivasyonunu ve kulüpten beklentilerini anlat... (min. 50 karakter)"
-                      rows={4}
+                      placeholder="Bize tutkunu, motivasyonunu ve kulüpten beklentilerini anlat... (min. 100 karakter)"
+                      rows={5}
                       error={errors.nedenKatilmak}
-                      hint={`${formData.nedenKatilmak.trim().length}/50 karakter`}
+                      hint={`${formData.nedenKatilmak.trim().length}/100 karakter`}
                     />
                   </motion.div>
                 )}
@@ -905,11 +868,11 @@ export default function BasvuruForm() {
                     <h3 className="font-race text-xl sm:text-2xl text-white mb-6">SON ADIM</h3>
 
                     <RadioGroup
-                      label="Etkinliklere katılmak ister misin?"
-                      name="etkinlikKatilimi"
-                      options={ETKINLIK_OPTIONS}
-                      value={formData.etkinlikKatilimi}
-                      onChange={(val) => handleRadioChange('etkinlikKatilimi', val)}
+                      label="Etkinliklere ne sıklıkta katılabilirsin?"
+                      name="etkinlikSikligi"
+                      options={ETKINLIK_SIKLIGI_OPTIONS}
+                      value={formData.etkinlikSikligi}
+                      onChange={(val) => handleRadioChange('etkinlikSikligi', val)}
                     />
 
                     {/* Rules Checkbox */}
@@ -964,10 +927,16 @@ export default function BasvuruForm() {
                           <span className="text-gray-500">Şehir</span>
                           <span className="text-white">{formData.sehir}</span>
                         </div>
-                        {formData.otomobilKulturu.length > 0 && (
+                        {formData.meslek && (
                           <div className="flex justify-between">
-                            <span className="text-gray-500">Kültür</span>
-                            <span className="text-ph-red">{formData.otomobilKulturu.join(', ')}</span>
+                            <span className="text-gray-500">Meslek</span>
+                            <span className="text-white">{formData.meslek}</span>
+                          </div>
+                        )}
+                        {formData.surusTarzlari.length > 0 && (
+                          <div className="flex justify-between">
+                            <span className="text-gray-500">İlgi Alanları</span>
+                            <span className="text-ph-red">{formData.surusTarzlari.join(', ')}</span>
                           </div>
                         )}
                       </div>

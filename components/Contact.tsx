@@ -202,7 +202,7 @@ export default function Contact() {
                 Topluluk
               </h3>
               <p className="relative font-futura text-base sm:text-lg text-gray-400 text-center z-10 group-hover:text-gray-300 transition-colors duration-300 mb-4">
-                23,000+ üye
+                26,000+ üye
               </p>
 
               {/* Bottom accent line */}

@@ -64,7 +64,7 @@ export default function Footer() {
               © {currentYear} Petrolheads
             </p>
             <p className="font-futura text-xs text-gray-500 mt-1 sm:mt-2">
-              İstanbul'da ❤️ ve yüksek oktanlı yakıtla yapıldı
+              İstanbul'da ❤️ ve dostluklarla yapıldı
             </p>
           </div>
         </div>

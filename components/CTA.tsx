@@ -134,7 +134,7 @@ export default function CTA() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="font-futura text-lg sm:text-xl md:text-2xl text-gray-300 mb-10 sm:mb-14 max-w-3xl mx-auto px-2 leading-relaxed"
           >
-            Bizi X'te takip et ve Türkiye'nin en tutkulu otomotiv topluluğunun bir parçası ol.
+            Bizi X'te takip et ve Türkiye'nin en tutkulu otomobil topluluğunun bir parçası ol.
           </motion.p>
 
           {/* CTA Button - Enhanced */}
