@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef, useState, useEffect, useMemo } from 'react'
+import Link from 'next/link'
 
 export default function CTA() {
   const ref = useRef(null)
@@ -191,35 +192,40 @@ export default function CTA() {
             <span className="relative z-10 tracking-wide">@PETROLHEADS'I TAKIP EDIN</span>
           </motion.a>
 
-          {/* Coming Soon Badge - Enhanced */}
+          {/* Başvuru CTA Badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.8 }}
-            whileHover={{ scale: 1.05, rotate: [0, -1, 1, -1, 0] }}
-            className="inline-flex items-center space-x-3 sm:space-x-4 bg-gradient-to-r from-ph-dark via-ph-black to-ph-dark border-2 border-ph-red/40 px-6 sm:px-8 py-3 sm:py-4 rounded-full backdrop-blur-sm hover:border-ph-red transition-all duration-300 cursor-pointer"
           >
-            <motion.span
-              className="text-2xl sm:text-3xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                rotate: [0, 10, -10, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            >
-              🔒
-            </motion.span>
-            <span className="font-futura text-gray-300 font-bold text-sm sm:text-base md:text-lg">
-              Özel Sürüş Kulübü
-            </span>
-            <div className="w-1 h-6 bg-ph-red/50" />
-            <span className="font-race text-ph-red text-sm sm:text-base md:text-lg">
-              2025'te Geliyor
-            </span>
+            <Link href="/basvuru">
+              <motion.div
+                whileHover={{ scale: 1.05, rotate: [0, -1, 1, -1, 0] }}
+                className="inline-flex items-center space-x-3 sm:space-x-4 bg-gradient-to-r from-ph-dark via-ph-black to-ph-dark border-2 border-ph-red/40 px-6 sm:px-8 py-3 sm:py-4 rounded-full backdrop-blur-sm hover:border-ph-red transition-all duration-300 cursor-pointer"
+              >
+                <motion.span
+                  className="text-2xl sm:text-3xl"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 10, -10, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                >
+                  🏁
+                </motion.span>
+                <span className="font-futura text-gray-300 font-bold text-sm sm:text-base md:text-lg">
+                  Özel Sürüş Kulübü
+                </span>
+                <div className="w-1 h-6 bg-ph-red/50" />
+                <span className="font-race text-ph-red text-sm sm:text-base md:text-lg">
+                  HEMEN BASVUR
+                </span>
+              </motion.div>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

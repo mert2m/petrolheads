@@ -2,9 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Navbar() {
+  const pathname = usePathname()
+  const isBasvuruPage = pathname === '/basvuru'
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
@@ -30,12 +34,13 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const prefix = isBasvuruPage ? '/' : ''
   const navLinks = [
-    { name: 'Ana Sayfa', href: '#home', section: 'home' },
-    { name: 'Hakkımızda', href: '#about', section: 'about' },
-    { name: 'Topluluk', href: '#features', section: 'features' },
-    { name: 'Galeri', href: '#gallery', section: 'gallery' },
-    { name: 'İletişim', href: '#contact', section: 'contact' },
+    { name: 'Ana Sayfa', href: `${prefix}#home`, section: 'home' },
+    { name: 'Hakkımızda', href: `${prefix}#about`, section: 'about' },
+    { name: 'Topluluk', href: `${prefix}#features`, section: 'features' },
+    { name: 'Galeri', href: `${prefix}#gallery`, section: 'gallery' },
+    { name: 'İletişim', href: `${prefix}#contact`, section: 'contact' },
   ]
 
   return (
@@ -55,7 +60,7 @@ export default function Navbar() {
         }`}>
           {/* Logo */}
           <motion.a
-            href="#home"
+            href={`${prefix}#home`}
             className="flex items-center space-x-2 sm:space-x-3 group"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -103,6 +108,24 @@ export default function Navbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ph-red/50 transition-all duration-300 group-hover:w-full" />
               </motion.a>
             ))}
+
+            {/* Başvuru CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <Link
+                href="/basvuru"
+                className={`font-futura font-bold text-xs sm:text-sm uppercase tracking-wider px-4 py-2 rounded-lg transition-all duration-300 border-2 touch-manipulation ${
+                  isBasvuruPage
+                    ? 'bg-ph-red text-white border-ph-red'
+                    : 'bg-ph-red/10 text-ph-red border-ph-red/50 hover:bg-ph-red hover:text-white hover:border-ph-red hover:shadow-[0_0_15px_rgba(227,30,36,0.3)]'
+                }`}
+              >
+                Başvuru
+              </Link>
+            </motion.div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -144,11 +167,18 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-white font-futura font-semibold text-base sm:text-lg uppercase tracking-wider hover:text-ph-red transition-colors duration-300 py-2 border-b border-ph-dark/50 last:border-0"
+                  className="block text-white font-futura font-semibold text-base sm:text-lg uppercase tracking-wider hover:text-ph-red transition-colors duration-300 py-2 border-b border-ph-dark/50"
                 >
                   {link.name}
                 </a>
               ))}
+              <Link
+                href="/basvuru"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block text-ph-red font-futura font-bold text-base sm:text-lg uppercase tracking-wider py-2"
+              >
+                Başvuru Yap
+              </Link>
             </div>
           </motion.div>
         )}
